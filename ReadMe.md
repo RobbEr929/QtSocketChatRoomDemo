@@ -1,9 +1,9 @@
-## ¸ÅÊö
-Ê¹ÓÃQt5 TcpSocket Óë TcpServer ÊµÏÖµÄÁÄÌìÊÒ£¬¿ÉÒÔÊµÏÖ¶à¸öÓÃ»§µÇÂ¼¼°ÏûÏ¢¹²Ïí
+## æ¦‚è¿°
+ä½¿ç”¨Qt5 TcpSocket ä¸Ž TcpServer å®žçŽ°çš„èŠå¤©å®¤ï¼Œå¯ä»¥å®žçŽ°å¤šä¸ªç”¨æˆ·ç™»å½•åŠæ¶ˆæ¯å…±äº«
 
-## ¹ØÓÚ
-ÏÐÀ´Ã»ÊÂ×öµÄdemo£¬¿ÉÄÜÓÐbugºÍÈ±ÏÝ
+## å…³äºŽ
+é—²æ¥æ²¡äº‹åšçš„demoï¼Œå¯èƒ½æœ‰bugå’Œç¼ºé™·
 
-ÓÐÒâ¼û»òÕßÒÉÎÊ¿ÉÒÔÁªÏµ×÷Õß£¬¼û[GithubÖ÷Ò³](https://github.com/RobbEr929)
+æœ‰æ„è§æˆ–è€…ç–‘é—®å¯ä»¥è”ç³»ä½œè€…ï¼Œè§[Githubä¸»é¡µ](https://github.com/RobbEr929)
 
-ÓÐÐèÒª¿ÉÒÔforkÐÞ¸Ä£¬×ñÑ­MITÐ­Òé
+æœ‰éœ€è¦å¯ä»¥forkä¿®æ”¹ï¼Œéµå¾ªMITåè®®
