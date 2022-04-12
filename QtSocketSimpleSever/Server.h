@@ -23,10 +23,13 @@ private slots:
 	void NewConnection();
 	void ReadMessage();
 	void Error(QAbstractSocket::SocketError);
+
 signals:
 	void InitRes(bool res);
 	void CloseRes(bool res);
 	void ReciveData(QString str);
+	void ConnectChanged();
+
 private:
 	QTcpServer* server;
 	QList<QTcpSocket*> sockets;

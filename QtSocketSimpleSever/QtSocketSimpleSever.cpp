@@ -46,6 +46,7 @@ void QtSocketSimpleSever::InitServer()
 	connect(server, SIGNAL(InitRes(bool)), this, SLOT(InitEvent(bool)));
 	connect(server, SIGNAL(CloseRes(bool)), this, SLOT(CloseEvent(bool)));
 	connect(server, SIGNAL(ReciveData(QString)), this, SLOT(AddRowInView(QString)));
+	connect(server, SIGNAL(ConnectChanged()), this, SLOT(UpdateConNum()));
 	serverThread->start();
 }
 
@@ -67,6 +68,18 @@ void QtSocketSimpleSever::InitWindow()
 	portButton->move(220, 30);
 	connect(portButton, &QPushButton::clicked, this, &QtSocketSimpleSever::SetListenPort);
 
+	QLabel* numLab = new QLabel(this);
+	portLab->setText(QStringLiteral("当前连接用户"));
+	portLab->setFont(QFont("Microsoft YaHei", 10, 50));
+	portLab->move(360, 30);
+
+	conLab = new QLabel(this);
+	conLab->setText("0");
+	conLab->setFont(QFont("Microsoft YaHei", 10, 75));
+	conLab->setPalette(QPalette(QPalette::WindowText, Qt::red));
+	conLab->resize(80, 30);
+	conLab->move(500, 30);
+
 	model = new QStringListModel;
 	view = new QListView(this);
 	view->resize(540, 300);
@@ -80,6 +93,11 @@ void QtSocketSimpleSever::AddRowInView(QString str)
 	model->insertRow(model->rowCount());
 	auto index = model->index(model->rowCount() - 1, 0);
 	model->setData(index, str, Qt::DisplayRole);
+}
+
+void QtSocketSimpleSever::UpdateConNum()
+{
+	conLab->setText(QString::number(server->NowConnectNum()));
 }
 
 void QtSocketSimpleSever::SetListenPort()

@@ -14,20 +14,20 @@ void QtSocketSimpleClient::BeginConversation()
 {
 	LOG(INFO) << QStringLiteral("连接成功");
 	AddRowInView(QStringLiteral("连接成功"));
-	clientButton->setEnabled(false);
+	clientButton->setEnabled(true);
 	sendButton->setEnabled(true);
+	clientButton->setText(QStringLiteral("断开连接"));
 }
 
 void QtSocketSimpleClient::SendOutMessage()
 {
-	AddRowInView(inputEdit->toPlainText());
 	emit Send(inputEdit->toPlainText());
 	inputEdit->clear();
 };
 
 void QtSocketSimpleClient::SetHostAndPort()
 {
-	if (clientButton->text().compare("断开连接"))
+	if (clientButton->text().compare(QStringLiteral("断开连接")))
 	{
 		if (addrEdit->text().compare("127.0.0.1"))
 		{
@@ -47,8 +47,8 @@ void QtSocketSimpleClient::SetHostAndPort()
 	else
 	{
 		client->DisConnect();
-		clientButton->setText(QStringLiteral("正在关闭"));
-		AddRowInView(QStringLiteral("正在关闭连接连接"));
+		clientButton->setText(QStringLiteral("连接"));
+		AddRowInView(QStringLiteral("关闭连接"));
 	}
 }
 

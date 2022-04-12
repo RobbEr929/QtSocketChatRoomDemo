@@ -23,6 +23,7 @@ private slots:
 	void InitEvent(bool res);
 	void CloseEvent(bool res);
 	void AddRowInView(QString str);
+	void UpdateConNum();
 
 signals:
 	void BeginInit();
@@ -34,6 +35,7 @@ private:
 	Ui::QtSocketSimpleSeverClass ui;
 	Server* server;
 	QThread* serverThread;
+	QLabel* conLab;
 	QLineEdit* portEdit;
 	QPushButton* portButton;
 	QListView* view;

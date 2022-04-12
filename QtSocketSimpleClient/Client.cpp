@@ -26,13 +26,13 @@ void Client::SendOutMessage(QString str)
 {
 	if (!str.isEmpty())
 	{
-		client->write(str.toLatin1());
+		client->write(str.toLocal8Bit());
 	}
 }
 
 void Client::ReciveMessage()
 {
-	emit Message(client->readAll());
+	emit Message(QString::fromLocal8Bit(client->readAll()));
 }
 
 void Client::DisConnect()

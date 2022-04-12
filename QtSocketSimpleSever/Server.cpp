@@ -22,9 +22,10 @@ void Server::Close()
 	{
 		i->write(closeMsg.toStdString().data());
 		i->close();
+		i->deleteLater();
 	}
 	server->close();
-	delete server;
+	server->deleteLater();
 	emit CloseRes(true);
 }
 
@@ -52,17 +53,19 @@ void Server::NewConnection()
 	connect(socket, SIGNAL(readyRead()), this, SLOT(ReadMessage()));
 	connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(Error(QAbstractSocket::SocketError)));
 	LOG(INFO) << QStringLiteral("新连接来自 %1").arg(socket->QAbstractSocket::peerAddress().toString());
+	emit ConnectChanged();
+	emit ReciveData(QStringLiteral("新连接来自 %1").arg(socket->QAbstractSocket::peerAddress().toString()));
 }
 
 void Server::ReadMessage()
 {
 	QTcpSocket* socket = (QTcpSocket*)QObject::sender();
-	QString data = socket->QAbstractSocket::peerAddress().toString() %":" % socket->readAll().data();
-	LOG(INFO) << QString("%1 : %2").arg(socket->QAbstractSocket::peerAddress().toString()).arg(data);
-	emit ReciveData(QStringLiteral("%1 : %2").arg(socket->QAbstractSocket::peerAddress().toString()).arg(data));
+	QString data = socket->QAbstractSocket::peerAddress().toString() % ":" % QString::fromLocal8Bit(socket->readAll());
+	LOG(INFO) << data;
+	emit ReciveData(data);
 	for (auto& i : sockets)
 	{
-		i->write(data.toStdString().data());
+		i->write(data.toLocal8Bit());
 	}
 }
 void Server::Error(QAbstractSocket::SocketError)
@@ -86,6 +89,7 @@ void Server::Error(QAbstractSocket::SocketError)
 		{
 			i->write(QStringLiteral("%1 已经断开连接").arg(hostAddress).toStdString().data());
 		}
+		emit ConnectChanged();
 		emit ReciveData(QStringLiteral("%1 已经断开连接").arg(hostAddress).toStdString().data());
 		LOG(INFO) << QStringLiteral("%1 已经断开连接").arg(hostAddress);
 		break;
